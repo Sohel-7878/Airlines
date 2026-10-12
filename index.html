@@ -1,0 +1,591 @@
+<!DOCKTYPE HTML>
+<html>
+	<head>
+		<title>
+			Airlines project
+		</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+		<style>
+			body {
+				  font-family: "Google Sans", sans-serif;
+			}
+			.progress{
+				position:fixed;
+				top:0;
+				left:0;
+				width:5px;
+				height:100%;
+				background-color:black;
+				animation:progress linear;
+				z-index:9999;
+				transform-origin:50% 0%;
+				animation-timeline:scroll();
+			}
+			@keyframes progress{
+				from{
+					transform:scale(0);
+				}
+				to{
+					transform:scale(1);
+				}
+			}
+			
+			.cards{
+					animation:cards linear;
+					animation-timeline: view();
+					animation-range: entry 10% cover 40%;
+					}
+					
+				@keyframes cards{
+				from{
+					opacity:1;
+					transform:scale(0.8);
+					}
+				to{
+					opacity:1;
+					transform:scale(1);
+				}
+			}
+		</style>
+		
+	</head>
+<body>
+	<div class="progress"></div>
+	<nav class="flex py-2 px-4 md:px-8  text-white border-b border-slate-300 min-h-[68px] relative z-20"
+					aria-label="Main navigation">
+   <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-4 w-full">
+      <div class="flex-1 flex">
+         <a href="#"
+            class="min-w-9 inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+            <span class="sr-only">Your Company</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="readymadeui logo" class="h-[35] w-auto" />
+         </a>
+      </div>
+		<form class="w-full max-w-[350px] mx-auto lg:mr-8" role="search">
+
+   <div class="flex items-center gap-2.5 px-3 py-2.5 relative rounded-full bg-white dark:bg-neutral-800 outline-1 -outline-offset-1 outline-slate-300 dark:outline-neutral-700 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-[#5c0a2d]">
+      <label for="search" class="sr-only">Search</label>
+      <input type="search" id="search" placeholder="Search..." required
+         class="text-sm text-slate-900 dark:text-slate-50 w-full outline-none pr-10" />
+
+      <button type="submit" aria-label="Search"
+         class="absolute right-0 h-full px-3 flex items-center justify-center bg-[#5c0a2d] rounded-r-full cursor-pointer">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" class="size-4 fill-white"
+            aria-hidden="true">
+            <path
+               d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
+            </path>
+         </svg>
+      </button>
+   </div>
+	</form>
+      <div id="collapseMenu" tabindex="-1"
+         class="hidden lg:block :bg-white max-lg:border-l max-lg:border-slate-300 max-lg:w-1/2 max-lg:fixed max-lg:top-0 max-lg:right-0 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto max-sm:w-full z-50 outline-none">
+
+         <div
+            class="py-2 px-4 flex justify-between items-center border-b border-slate-300 sticky top-0 bg-white lg:hidden max-lg:min-h-[68px]">
+            <a href="#"
+               class="inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+               <span class="sr-only">Your Company</span>
+               <img src="https://readymadeui.com/logo-alt.svg" alt="readymadeui logo" class="h-9 w-auto" />
+            </a>
+            <button type="button" aria-controls="collapseMenu" id="toggleClose"
+               class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+               <span class="sr-only">Close main menu</span>
+               <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-slate-900"
+                  aria-hidden="true" viewBox="0 0 329.269 329">
+                  <path
+                     d="M194.8 164.77 323.013 36.555c8.343-8.34 8.343-21.825 0-30.164-8.34-8.34-21.825-8.34-30.164 0L164.633 134.605 36.422 6.391c-8.344-8.34-21.824-8.34-30.164 0-8.344 8.34-8.344 21.824 0 30.164l128.21 128.215L6.259 292.984c-8.344 8.34-8.344 21.825 0 30.164a21.27 21.27 0 0 0 15.082 6.25c5.46 0 10.922-2.09 15.082-6.25l128.21-128.214 128.216 128.214a21.27 21.27 0 0 0 15.082 6.25c5.46 0 10.922-2.09 15.082-6.25 8.343-8.34 8.343-21.824 0-30.164zm0 0"
+                     data-original="#000000" />
+               </svg>
+            </button>
+         </div>
+
+         <ul class="flex flex-col gap-8 font-semibold text-sm text-[#5c0a2d] lg:flex-row max-lg:p-6">
+            <li>
+               <a href="#"
+                  class="hover:text-pink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded "
+                  aria-current="page">Plan my trip</a>
+            </li>
+            <li>
+               <a href="#"
+                  class="hover:text-pink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ">Explore</a>
+            </li>
+            <li>
+               <a href="#"
+                  class="hover:text-pink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ">Book</a>
+            </li>
+            <li>
+               <a href="#"
+                  class="hover:text-pink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ">Experience</a>
+            </li>
+            <li>
+               <a href="#"
+                  class="hover:text-pink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ">Contact</a>
+            </li>
+            <li>
+               <a href="#"
+                  class="hover:text-pink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ">Log
+                  in</a>
+            </li>
+         </ul>
+      </div>
+
+      <div class="flex items-center gap-4 lg:ml-4">
+         <a href="#"
+            class="py-2 px-3.5 text-sm rounded-md font-semibold cursor-pointer text-white border border-[#5c0a2d] bg-[#5c0a2d] hover:bg-pink-800 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sign
+            up</a>
+
+         <button type="button" aria-controls="collapseMenu" aria-expanded="false" aria-haspopup="true" id="toggleOpen"
+            class="cursor-pointer lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+            <span class="sr-only">Open main menu</span>
+            <svg class="size-7 fill-slate-900" aria-hidden="true" viewBox="0 0 20 20"
+               xmlns="http://www.w3.org/2000/svg">
+               <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"></path>
+            </svg>
+         </button>
+      </div>
+   </div>
+	</nav>
+	<figure>	
+<div class="relative w-full h-[520] bg-gray-900">
+  <!-- The Full-Size Image -->
+  <img 
+    src="https://wallpapercat.com/w/full/1/5/a/1428532-1920x1080-desktop-1080p-qatar-airways-wallpaper-image.jpg" 
+    alt="Background" 
+    class="absolute inset-0 w-full h-[520px] object-cover opacity-60"
+  />
+
+  <!-- The Text Overlay Container -->
+  <div class="relative flex h-full flex-col  justify-center  px-4">
+	<h1 class="text-4xl md:text-2xl  text-white drop-shadow-lg ps-10 md-tracking-[0.25em] font-extrabold">
+      A FLIGHT TO THE LOVE YOU ONES
+    </h1>
+    <h1 class="text-4xl md:text-3xl  text-white drop-shadow-lg ps-10 pt-8 font-extrabold">
+      BECAUSE THE BEST JOURNEYS <br>END WITH HUG
+    </h1>
+	
+  </div>
+</div>
+</figure>
+	<div class="bg-[#5c0a2d] text-white">
+		<div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3">
+			<i class="ri-information-line text-xl"></i>
+
+			<p class="text-sm">
+				oreign nationality passengers travelling to Mizoram are requested to ensure that they have valid Protection Area Permit(PAP).
+			</p>
+
+			<button class="ml-auto text-sm font-semibold underline">
+				Learn more
+			</button>
+		</div>
+	</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 " class="cards">
+  
+  
+  
+  <!-- Image 1 -->
+  <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1622660515427-9d05e6d102bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGVmZmllbCUyMHRvd2VyfGVufDB8fDB8fHww" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> France || Inr 50,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 2 -->
+   <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=752&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Singapore || Inr 15,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 3 -->
+  <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://plus.unsplash.com/premium_photo-1671734045354-12292766e1b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGxvbmRvbiUyMGJyaWRnZXxlbnwwfHwwfHx8MA%3D%3D" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> London || Inr 18,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 4 -->
+   <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://plus.unsplash.com/premium_photo-1697729914552-368899dc4757?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnVyaiUyMGtoYWxpZmElMjBuaWdodHxlbnwwfHwwfHx8MA%3D%3D" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Dubai || Inr 14,000</h2>
+    </div>
+  </div>
+
+</div>
+
+
+ <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4" class="cards">
+  
+  <!-- Image 1 -->
+  <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://media.istockphoto.com/id/2224132439/photo/manchester-skyline-in-the-morning.webp?a=1&b=1&s=612x612&w=0&k=20&c=xndZM3Gb0nVuqFJNk58ckNWNGgAwAi8sRUhweM1LhbQ=" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> England|| Inr 22,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 2 -->
+   <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1610991136128-838ca3c5497b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8RWRpbmJ1cmdofGVufDB8fDB8fHww" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Scotland || Inr 36,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 3 -->
+  <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YW1zdGVyZGFtfGVufDB8fDB8fHww" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Netherlands || Inr 55,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 4 -->
+   <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1657137436880-e906b111b040?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8enVyaWNofGVufDB8fDB8fHww" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Switzerland || Inr 75,000</h2>
+    </div>
+  </div>
+
+</div>
+
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4" class="cards">
+  
+  <!-- Image 1 -->
+  <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWFkcmlkfGVufDB8fDB8fHww" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Spain || Inr 35,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 2 -->
+   <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://plus.unsplash.com/premium_photo-1661902398022-762e88ff3f82?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8VG9reW98ZW58MHx8MHx8fDA%3D" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Japan || Inr 30,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 3 -->
+  <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1570902803014-25a4c344d4e6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8QmFua29rfGVufDB8fDB8fHww" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> Thailand || Inr 16,000</h2>
+    </div>
+  </div>
+
+  <!-- Image 4 -->
+   <div class="relative w-full h-96 overflow-hidden rounded-xl shadow-lg hover:brightness-150 transition-brightness-150 duration-500 duration-300 hover:scale-103 cards">
+    <img src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmV3JTIweW9ya3xlbnwwfHwwfHx8MA%3D%3D" alt="Image 1" class="w-full h-full object-cover">
+    <!-- Text on top of Image -->
+    <div class="absolute inset-0 bg-black/40 flex items-end justify-start">
+      <h2 class="text-white text-2xl font-bold p-5"> USA || Inr 1,15,000</h2>
+    </div>
+  </div>
+
+</div>
+		
+
+
+  <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 cards" >
+    <!-- Header Title -->
+    <div class="mb-6 text-center">
+      <h1 class="text-3xl font-extrabold text-slate-900 text-">Book Your Flight</h1>
+      <p class="text-sm text- mt-1">Fill in the details below to search and secure your next trip.</p>
+    </div>
+
+    <!-- Booking Form Card -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden p-6 sm:p-8 mb-10 border border-slate-100">
+      <form class="space-y-6">
+        <!-- Trip Type Selection -->
+        <div class="flex space-x-6 border-b border-slate-100 pb-4">
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="radio" name="tripType" checked class="text-blue-600 focus:ring-blue-500 h-4 w-4">
+            <span class="text-sm font-medium text-slate-700">Round Trip</span>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="radio" name="tripType" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
+            <span class="text-sm font-medium text-slate-700">One Way</span>
+          </label>
+        </div>
+
+        <!-- Inputs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- From -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">From</label>
+            <input type="text" placeholder="City or Airport" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5c0a2d] text-sm">
+          </div>
+          <!-- To -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">To</label>
+            <input type="text" placeholder="City or Airport" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5c0a2d] text-sm">
+          </div>
+          <!-- Departure Date -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Departure</label>
+            <input type="date" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5c0a2d] text-sm text-slate-600">
+          </div>
+          <!-- Return Date -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Return</label>
+            <input type="date" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5c0a2d] text-sm text-slate-600">
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end pt-2">
+          <button type="submit" class="w-full sm:w-auto bg-[#5c0a2d] hover:bg-pink-800 text-white font-semibold px-8 py-3 rounded-xl transition duration-200 shadow-lg shadow-[#5c0a2d]">
+            Search Flights
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Generated Ticket / Boarding Pass Preview -->
+    <div class="bg-[#5c0a2d] rounded-2xl text-white shadow-2xl overflow-hidden flex flex-col md:flex-row cards">
+      <!-- Left Ticket Body -->
+      <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+        <div class="flex justify-between items-center">
+          <span class="text-xs tracking-widest uppercase bg-white/20 px-3 py-1 rounded-full font-semibold">Boarding Pass</span>
+          <span class="text-lg font-bold tracking-wider">GA-789</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div>
+            <span class="block text-xs text-blue-200 uppercase">Passenger</span>
+            <span class="text-sm font-bold">JOHN SMITH</span>
+          </div>
+          <div>
+            <span class="block text-xs text-blue-200 uppercase">Flight Date</span>
+            <span class="text-sm font-bold">JUN 20 (FRI)</span>
+          </div>
+          <div>
+            <span class="block text-xs text-blue-200 uppercase">Class</span>
+            <span class="text-sm font-bold">Economy Plus</span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center border-t border-white/10 pt-4">
+          <div>
+            <span class="text-2xl font-black">MUM</span>
+            <span class="block text-xs text-blue-200">10:30 AM</span>
+          </div>
+          <div class="text-blue-200 font-medium text-sm">→ 8h 15m →</div>
+          <div class="text-right">
+            <span class="text-2xl font-black">NYC</span>
+            <span class="block text-xs text-blue-200">01:45 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Stub / Barcode area -->
+      <div class="bg-white/10 md:w-48 p-6 sm:p-8 flex md:flex-col justify-between items-center border-t md:border-t-0 md:border-l border-dashed border-white/20">
+        <div class="text-center md:text-left">
+          <span class="block text-xs text-blue-200 uppercase">Gate</span>
+          <span class="text-xl font-extrabold">A17</span>
+        </div>
+        <div class="text-center md:text-left my-2 md:my-0">
+          <span class="block text-xs text-blue-200 uppercase">Seat</span>
+          <span class="text-xl font-extrabold">14F</span>
+        </div>
+        <!-- Simulated Barcode -->
+        <div class="bg-white h-10 w-32 rounded flex items-center justify-center text-slate-900 text-xs font-mono tracking-widest font-bold">
+          ||| | |||| ||
+        </div>
+      </div>
+    </div>
+  </div>
+	<h5 class="text-xl font-extrabold tracking-tight ms-5 text-center cards"> Top destinations </h5>
+	<div class="flex justify-center items-center cards">	
+	<p class="mt-3 ms-5 [word-spacing:5px] cards">
+		London |  Paris | New york | Bangkok | Maldives | Mumbai | Sydney | Johnnesberg |
+		Tokyo | Singapore
+	
+	</p>
+   </div>
+	
+	<h5 class="text-xl font-extrabold tracking-tight ms-5 mt-5 text-center cards"> Our routes</h5>
+	<div class="flex justify-center items-center cards">	
+		<p class="mt-3 ms-5 [word-spacing:5px]">
+			Doha to London  | Doha to Paris | Doha to NewYork | Doha to Maldives | Doha to Mumbai.
+		</p>
+	</div>
+   	
+	
+<footer class=" pt-16 pb-8 px-4 md:px-8 mt-8 bg-[#5c0a2d] text-white">
+   <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-12 gap-x-6 sm:gap-x-8">
+      <div class="space-y-6">
+         <h3 class="text-lg text-slate-50 font-semibold">About us</h3>
+         <ul class="space-y-4 text-sm text-slate-400 font-normal text-white">
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Our Policies
+                  </a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Our Company</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Our Management</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Route Map & Schedule</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Destinations</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Our Fleet</a>
+			</li>
+			  <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">CSR Initiatives</a>
+			</li>
+			  <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Board of Directors</a>
+			</li>
+			  <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Financials</a>
+			</li>
+			  <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">CVO</a>
+			</li>
+         </ul>
+      </div>
+
+      <div class="space-y-6">
+         <h3 class="text-lg text-slate-50 font-semibold">Media</h3>
+         <ul class="space-y-4 text-sm text-slate-400 font-normal text-white">
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Photo Gallery</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Media Contacts</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Media Kit</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Awards</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Press Releases</a></li>
+         </ul>
+      </div>
+
+      <div class="space-y-6">
+         <h3 class="text-lg text-slate-100 font-semibold">Quick links</h3>
+         <ul class="space-y-4 text-sm text-slate-400 font-normal text-white">
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Flight Schedule</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Tariff Sheet</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Restricted Baggage</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Baggage Information</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">FAQs</a></li>
+            <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">  </a></li>
+				  
+			 <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Forms and Downloads  </a></li>
+			 <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all"> GST Invoice </a></li>
+
+			 <li><a href="#"
+                  class="hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all"> Refunds </a></li>		
+         </ul>
+      </div>
+	  
+	  
+
+      <div class="space-y-6">
+         <h3 class="text-sm text-slate-50 font-semibold">Quick links</h3>
+         <ul class="flex flex-wrap gap-6">
+            <li>
+               <a href="#"
+                  class="flex items-center bg-slate-800 dark:bg-neutral-800 w-8 h-8 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  aria-label="Facebook">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-full fill-slate-50" viewBox="0 0 155.139 155.139"
+                     aria-hidden="true">
+                     <path
+                        d="M89.584 155.139V84.378h23.742l3.562-27.585H89.584V39.184c0-7.984 2.208-13.425 13.67-13.425l14.595-.006V1.08C115.325.752 106.661 0 96.577 0 75.52 0 61.104 12.853 61.104 36.452v20.341H37.29v27.585h23.814v70.761z"
+                        data-original="#010002" />
+                  </svg>
+               </a>
+            </li>
+            <li>
+               <a href="#"
+                  class="flex items-center bg-slate-800 dark:bg-neutral-800 w-8 h-8 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  aria-label="LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-full fill-slate-50" viewBox="0 0 24 24"
+                     aria-hidden="true">
+                     <path
+                        d="M23.994 24v-.001H24v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07V7.976H8.489v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243V24zM.396 7.977h4.976V24H.396zM2.882 0C1.291 0 0 1.291 0 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909A2.884 2.884 0 0 0 2.882 0"
+                        data-original="#000000" />
+                  </svg>
+               </a>
+            </li>
+            <li>
+               <a href="#"
+                  class="flex items-center bg-slate-800 dark:bg-neutral-800 w-8 h-8 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  aria-label="X">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-full fill-slate-50" viewBox="0 0 1226.37 1226.37"
+                     aria-hidden="true">
+                     <path
+                        d="M727.348 519.284 1174.075 0h-105.86L680.322 450.887 370.513 0H13.185l468.492 681.821L13.185 1226.37h105.866l409.625-476.152 327.181 476.152h357.328L727.322 519.284zM582.35 687.828l-47.468-67.894-377.686-540.24H319.8l304.797 435.991 47.468 67.894 396.2 566.721H905.661L582.35 687.854z"
+                        data-original="#000000" />
+                  </svg>
+               </a>
+            </li>
+         </ul>
+
+         <div class="!mt-8">
+            <h6 class="text-sm text-slate-400 text-white">Get exclusive assets sent straight to your inbox</h6>
+            <div class="mt-6">
+               <a href="#"
+                  class="py-2 px-3.5 text-sm rounded-md font-semibold inline-block cursor-pointer tracking-wide text-[#5c0a2d] border border-black bg-white hover:bg-pink-800 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sign
+                  up</a>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <hr class="my-8 border-neutral-700" />
+
+   <div class="text-center">
+      <p class="text-slate-400 text-sm">
+         © ReadymadeUI. All rights reserved.
+      </p>
+   </div>
+</footer>
+	
+
+                       
+ 
+ 
+
+
+	
+</body>
+</html>
+
+			
+
